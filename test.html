@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Slider</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+
+    <div class="w-[700px] overflow-hidden relative">
+        <!-- Slider Wrapper -->
+        <div class="flex transition-transform duration-500 ease-in-out slider-wrapper">
+            <img src="images/image 1.jpg" class="w-[700px] flex-shrink-0" />
+            <img src="images/image 2.jpg" class="w-[700px] flex-shrink-0" />
+            <img src="images/image 3.jpg" class="w-[700px] flex-shrink-0" />
+            <img src="images/image 4.jpg" class="w-[700px] flex-shrink-0" />
+            <img src="images/image 5.jpg" class="w-[700px] flex-shrink-0" />
+        </div>
+
+        <!-- Controls -->
+        <div class="flex justify-between absolute top-1/2 left-0 w-full px-4 -translate-y-1/2">
+            <button class="previous hover:scale-110 transition-transform duration-200">
+                <img src="svgs/previous.svg" alt="Previous" class="w-8 h-8" />
+            </button>
+            <button class="next hover:scale-110 transition-transform duration-200">
+                <img src="svgs/next.svg" alt="Next" class="w-8 h-8" />
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const sliderWrapper = document.querySelector('.slider-wrapper');
+const nextBtn = document.querySelector('.next');
+const prevBtn = document.querySelector('.previous');
+const totalSlides = sliderWrapper.children.length;
+let currentIndex = 0;
+
+function updateSlider() {
+  const offset = -currentIndex * 700; // 700px = width of each image
+  sliderWrapper.style.transform = `translateX(${offset}px)`;
+}
+
+nextBtn.addEventListener('click', () => {
+  currentIndex = (currentIndex + 1) % totalSlides;
+  updateSlider();
+});
+
+prevBtn.addEventListener('click', () => {
+  currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+  updateSlider();
+});
+
+    </script>
+</body>
+
+</html>
